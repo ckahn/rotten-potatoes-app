@@ -1,2 +1,46 @@
 <h1>Movies#index</h1>
-<p>Find me in app/views/movies/index.html.erb</p>
+
+<div id="movies-index">
+  <ul></ul>
+
+  <script id="template" type="text/template">
+    <%% movies.forEach(function (movie) { %>
+      <li><%%= movie.title %> </li>
+      <ul>
+        <li>Release Date: <%%= movie.release_date %> </li>
+        <li>Overview: <%%= movie.overview || 'N/A' %> </li>
+      </ul>
+    <%% }); %>
+  </script>
+</div>
+
+<script type="text/javascript">
+  $.MoviesIndex = function (el) {
+    this.$el = $(el);
+    $.ajax({
+      dataType: "json",
+      url: 'http://api.themoviedb.org/3/discover/movie?' +
+        'primary_release_year=2014&sort_by=vote_average.desc&' +
+        'api_key=e505edada279c368d098a520d3fd7992',
+      data: {},
+      success: this.render.bind(this)
+    });
+  };
+
+  $.MoviesIndex.prototype.render = function (data) {
+    var tmpl = _.template(this.$el.find('script#template').html());
+    $(this.$el.find('ul')).append(
+      tmpl({ movies: data.results })
+    );
+  };
+
+  $.fn.moviesIndex = function () {
+    return this.each(function () {
+      new $.MoviesIndex(this);
+    });
+  };
+
+  $(function() {
+      $('div#movies-index').moviesIndex();
+  });
+</script>
