@@ -3,78 +3,26 @@
 <div id="movies-index">
   <p>Sort by:</p>
   <select>
-    <option value="title" selected="selected">Title</option>
-    <option value="release date">Release Date</option>
+    <option value="date" selected="selected">Release Date</option>
+    <option value="title">Title</option>
     <option value="genre">Genre</option>
   </select>
 
-  <ul></ul>
+  <ul id="main-list"></ul>
 
   <script id="template" type="text/template">
     <%% movies.forEach(function (movie) { %>
-      <li><%%= movie.title %> </li>
-      <ul>
-        <li>Release Date: <%%= movie.release_date %> </li>
-        <li>Genre: <%%= genreCodes[movie.genre_ids[0]] %></li>
-      </ul>
+      <li
+        data-title="<%%= movie.title %>"
+        data-date="<%%= movie.release_date %>"
+        data-genre="<%%= genreCodes[movie.genre_ids[0]] %>"
+      >
+        <%%= movie.title %>
+        <ul>
+          <li>Release Date: <%%= movie.release_date %> </li>
+          <li>Genre: <%%= genreCodes[movie.genre_ids[0]] %></li>
+        </ul>
+      </li>
     <%% }); %>
   </script>
 </div>
-
-<script type="text/javascript">
-  $.MoviesIndex = function (el) {
-    this.$el = $(el);
-    this.genreCodes = {
-      "28" : "Action",
-      "12" : "Adventure",
-      "16" : "Animation",
-      "35" : "Comedy",
-      "80" : "Crime",
-      "99" : "Documentary",
-      "18" : "Drama",
-      "10751" : "Family",
-      "14" : "Fantasy",
-      "10769" : "Foreign",
-      "36" : "History",
-      "27" : "Horror",
-      "10402" : "Music",
-      "9648" : "Mystery",
-      "10749" : "Romance",
-      "878" : "Science Fiction",
-      "10770" : "TV Movie",
-      "53" : "Thriller",
-      "10752" : "War",
-      "37" : "Western"
-    };
-    $("select").on("change", function (e) {
-      console.log($(event.target).find('option:selected').text());
-    });
-
-    $.ajax({
-      dataType: "json",
-      url: 'http://api.themoviedb.org/3/discover/movie?with_cast=51576&sort_by=release_date.desc&api_key=e505edada279c368d098a520d3fd7992',
-      data: {},
-      success: this.render.bind(this)
-    });
-  };
-
-  $.MoviesIndex.prototype.render = function (data) {
-    var tmpl = _.template(this.$el.find('script#template').html());
-    $(this.$el.find('ul')).append(
-      tmpl({
-        movies: data.results,
-        genreCodes: this.genreCodes
-      })
-    );
-  };
-
-  $.fn.moviesIndex = function () {
-    return this.each(function () {
-      new $.MoviesIndex(this);
-    });
-  };
-
-  $(function() {
-      $('div#movies-index').moviesIndex();
-  });
-</script>
