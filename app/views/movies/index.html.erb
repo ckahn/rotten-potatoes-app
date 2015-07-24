@@ -1,6 +1,13 @@
-<h1>Movies#index</h1>
+<h1>Chuck Norris!</h1>
 
 <div id="movies-index">
+  <p>Sort by:</p>
+  <select>
+    <option value="title" selected="selected">Title</option>
+    <option value="release date">Release Date</option>
+    <option value="genre">Genre</option>
+  </select>
+
   <ul></ul>
 
   <script id="template" type="text/template">
@@ -9,7 +16,6 @@
       <ul>
         <li>Release Date: <%%= movie.release_date %> </li>
         <li>Genre: <%%= genreCodes[movie.genre_ids[0]] %></li>
-        <li>Overview: <%%= movie.overview || 'N/A' %> </li>
       </ul>
     <%% }); %>
   </script>
@@ -40,6 +46,9 @@
       "10752" : "War",
       "37" : "Western"
     };
+    $("select").on("change", function (e) {
+      console.log($(event.target).find('option:selected').text());
+    });
 
     $.ajax({
       dataType: "json",
