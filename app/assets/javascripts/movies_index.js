@@ -43,7 +43,9 @@ $.MoviesIndex = function (el) {
 
   $.ajax({
     dataType: 'json',
-    url: 'http://api.themoviedb.org/3/discover/movie?with_cast=51576&sort_by=release_date.desc&api_key=e505edada279c368d098a520d3fd7992',
+    url: 'http://api.themoviedb.org/3/discover/movie?' +
+      'with_cast=51576&sort_by=release_date.desc&' +
+      'api_key=e505edada279c368d098a520d3fd7992',
     data: {},
     success: this.render.bind(this)
   });
