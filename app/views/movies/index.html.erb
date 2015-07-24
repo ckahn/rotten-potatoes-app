@@ -8,6 +8,7 @@
       <li><%%= movie.title %> </li>
       <ul>
         <li>Release Date: <%%= movie.release_date %> </li>
+        <li>Genre: <%%= genreCodes[movie.genre_ids[0]] %></li>
         <li>Overview: <%%= movie.overview || 'N/A' %> </li>
       </ul>
     <%% }); %>
@@ -17,11 +18,32 @@
 <script type="text/javascript">
   $.MoviesIndex = function (el) {
     this.$el = $(el);
+    this.genreCodes = {
+      "28" : "Action",
+      "12" : "Adventure",
+      "16" : "Animation",
+      "35" : "Comedy",
+      "80" : "Crime",
+      "99" : "Documentary",
+      "18" : "Drama",
+      "10751" : "Family",
+      "14" : "Fantasy",
+      "10769" : "Foreign",
+      "36" : "History",
+      "27" : "Horror",
+      "10402" : "Music",
+      "9648" : "Mystery",
+      "10749" : "Romance",
+      "878" : "Science Fiction",
+      "10770" : "TV Movie",
+      "53" : "Thriller",
+      "10752" : "War",
+      "37" : "Western"
+    };
+
     $.ajax({
       dataType: "json",
-      url: 'http://api.themoviedb.org/3/discover/movie?' +
-        'primary_release_year=2014&sort_by=vote_average.desc&' +
-        'api_key=e505edada279c368d098a520d3fd7992',
+      url: 'http://api.themoviedb.org/3/discover/movie?with_cast=51576&sort_by=release_date.desc&api_key=e505edada279c368d098a520d3fd7992',
       data: {},
       success: this.render.bind(this)
     });
@@ -30,7 +52,10 @@
   $.MoviesIndex.prototype.render = function (data) {
     var tmpl = _.template(this.$el.find('script#template').html());
     $(this.$el.find('ul')).append(
-      tmpl({ movies: data.results })
+      tmpl({
+        movies: data.results,
+        genreCodes: this.genreCodes
+      })
     );
   };
 
