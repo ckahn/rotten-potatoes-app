@@ -1,10 +1,14 @@
-<h1><%= @movie_data['title'] %></h1>
-<img
-  src="https://image.tmdb.org/t/p/w396/<%= @movie_data['poster_path'] %>"
-  width="200">
-<p><%= @movie_data['overview'] %></p>
+<div class="media">
+  <div class="media-left">
+      <img class="media-object" src="https://image.tmdb.org/t/p/w396/<%= @movie_data['poster_path'] %>" width="200" alt="...">
+  </div>
+  <div class="media-body">
+    <h1 class="media-heading"><%= @movie_data['title'] %></h4>
+    <%= @movie_data['overview'] %>
+  </div>
+</div>
 
-<h2>Add Review</h2>
+<h3>Add Review</h3>
 <form class="review-compose">
   <input
     type="hidden"
@@ -30,7 +34,7 @@
   <input type="submit">
 </form>
 
-<h2>Reviews</h2>
+<h3>Reviews</h3>
 <% if @reviews.empty? %>
   <p>[No reviews yet]</p>
 <% end %>
