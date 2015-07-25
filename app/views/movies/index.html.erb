@@ -1,18 +1,21 @@
-<h1>Chuck Norris Movies</h1>
+<h1>Movies (with Chuck Norris)</h1>
 
 <div class="movies-index">
-  <p>Sort movies by:</p>
-  <select>
-    <option value="date" selected="selected">Release Date</option>
-    <option value="title">Title</option>
-    <option value="genre">Genre</option>
-  </select>
 
-  <ul class="main-list"></ul>
+  <div style="padding-bottom: 10px;">
+    <p style="display: inline;">Sort movies by:</p>
+    <select>
+      <option value="date" selected="selected">release date</option>
+      <option value="title">title</option>
+      <option value="genre">genre</option>
+    </select>
+  </div>
+
+  <ul class="main-list list-group"></ul>
 
   <script class="template" type="text/template">
     <%% movies.forEach(function (movie) { %>
-      <li
+      <li class="list-group-item"
         data-title="<%%= movie.title %>"
         data-date="<%%= movie.release_date %>"
         data-genre="<%%= genreCodes[movie.genre_ids[0]] %>">
