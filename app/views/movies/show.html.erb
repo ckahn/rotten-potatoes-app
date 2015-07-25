@@ -7,8 +7,10 @@
       </img>
   </div>
   <div class="media-body">
-    <h1 class="media-heading"><%= @movie_data['title'] %></h4>
-    <%= @movie_data['overview'] %>
+    <h1 class="media-heading"><%= @movie_data['title'] %> (<%= @movie_data['release_date'][0..3] %>)</h4>
+    <p><%= @movie_data['genres'][0]['name'] %></p>
+    <p><%= @movie_data['overview'] %></p>
+    <p>(<%= @movie_data['runtime'] %> minutes)</p>
   </div>
 </div>
 
@@ -48,6 +50,7 @@
 <ul class="movie-show-reviews">
   <% @reviews.each do |review| %>
     <li><i><%= review.email %></i>
+      (<%= time_ago_in_words(review.created_at) %> ago)
       <% review.rating.to_i.times do %>
       <span class="glyphicon glyphicon-star" style="color: yellow;"></span>
       <% end %>

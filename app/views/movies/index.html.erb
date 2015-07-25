@@ -21,7 +21,7 @@
         data-genre="<%%= genreCodes[movie.genre_ids[0]] %>">
         <a href="/movies/<%%= movie.id %>">
           <h3><%%= movie.title %></h3>
-          <p style="color: black;"><%%= movie.release_date %></p>
+          <p style="color: black; margin-left: 2px;"><%%= movie.release_date %></p>
           <img class="" width="200" src="http://image.tmdb.org/t/p/w396/<%%= movie.poster_path %>">
         </a>
         <p class="text-muted" style="padding-top: 10px;"><%%= genreCodes[movie.genre_ids[0]] %></p>
