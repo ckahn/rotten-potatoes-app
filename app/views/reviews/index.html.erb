@@ -1,0 +1,7 @@
+<ul class="list-group">
+  <% @reviews.each do |review| %>
+  <li class="list-group-item">
+    <%= review.email %> rated <i><%= review.movie_title %><i> <strong><%= review.rating %> out of 5</strong>.
+   </li>
+  <% end %>
+</li>
