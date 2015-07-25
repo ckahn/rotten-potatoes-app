@@ -19,12 +19,12 @@
         data-title="<%%= movie.title %>"
         data-date="<%%= movie.release_date %>"
         data-genre="<%%= genreCodes[movie.genre_ids[0]] %>">
-
-        <a href="/movies/<%%= movie.id %>"><%%= movie.title %></a>
-        <ul>
-          <li>Released: <%%= movie.release_date %> </li>
-          <li>Genre: <%%= genreCodes[movie.genre_ids[0]] %></li>
-        </ul>
+        <a href="/movies/<%%= movie.id %>">
+          <h3><%%= movie.title %></h3>
+          <p style="color: black;"><%%= movie.release_date %></p>
+          <img class="" width="200" src="https://image.tmdb.org/t/p/w396/<%%= movie.poster_path %>">
+        </a>
+        <p class="text-muted"><%%= genreCodes[movie.genre_ids[0]] %></p>
       </li>
     <%% }); %>
   </script>
