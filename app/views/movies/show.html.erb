@@ -6,6 +6,10 @@
 
 <h2>Add Review</h2>
 <form class="review-compose">
+  <input
+    type="hidden"
+    name="review[movie_id]"
+    value="<%= @movie_data['id'] %>">
   <label>Email
     <input type="text" name="review[email]">
   </label>
@@ -20,41 +24,19 @@
   <input type="submit">
 </form>
 
-<h2>Review</h2>
+<h2>Reviews</h2>
+<% if @reviews.empty? %>
+  <p>[No reviews yet]</p>
+<% end %>
 <ul>
-  <li>Review</li>
+  <% @reviews.each do |review| %>
+    <li>Email: <%= review.email %> | Rating: <%= review.rating %></li>
+  <% end %>
 </ul>
 
+<%= link_to "Home", root_url %>
+
 <script type="text/javascript">
-  $.ReviewCompose = function (el) {
-    this.$el = $(el);
-    this.$el.on('submit', function (e) {
-      e.preventDefault();
-      var params = $(e.target).serializeJSON();
-      saveReview(params);
-    })
-  };
-
-  var saveReview = function (params) {
-    $.ajax({
-      method: 'POST',
-      url: '/reviews',
-      dataType: 'json',
-      data: params,
-      success: function () {
-        console.log('SUCCESS');
-      },
-      error: function () {
-        console.log('ERROR');
-      }
-    });
-  }
-  $.fn.reviewCompose = function () {
-    this.each(function () {
-      new $.ReviewCompose(this);
-    })
-  };
-
   $(function () {
     $('form.review-compose').reviewCompose();
   })

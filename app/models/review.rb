@@ -1,3 +1,3 @@
 class Review < ActiveRecord::Base
-  validates :email, :rating, presence: true
+  validates :email, :rating, :movie_id, presence: true
 end

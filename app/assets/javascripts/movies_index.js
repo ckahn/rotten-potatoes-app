@@ -99,7 +99,3 @@ $.fn.moviesIndex = function () {
     new $.MoviesIndex(this);
   });
 };
-
-$(function() {
-  $('div.movies-index').moviesIndex();
-});
