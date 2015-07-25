@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
+//= require serializejson
 //= require movies_index
 //= require turbolinks
 //= require_tree .

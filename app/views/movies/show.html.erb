@@ -1,3 +1,53 @@
 <h1><%= @film_data['title'] %></h1>
-<img src="https://image.tmdb.org/t/p/w396/<%= @film_data['poster_path'] %>">
+<img
+  src="https://image.tmdb.org/t/p/w396/<%= @film_data['poster_path'] %>"
+  width="200">
 <p><%= @film_data['overview'] %></p>
+
+<h2>Add Review</h2>
+<form class="review-compose">
+  <label>Email
+    <input type="text" name="review[email]">
+  </label>
+  <label>Rating
+    <select name="review[rating]">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+  </label>
+  <input type="submit">
+</form>
+
+<script type="text/javascript">
+  $.ReviewCompose = function (el) {
+    this.$el = $(el);
+    this.$el.on('submit', function (e) {
+      e.preventDefault();
+      var params = $(e.target).serializeJSON();
+      $.ajax({
+        method: 'POST',
+        url: '/reviews',
+        dataType: 'json',
+        data: params,
+        success: function () {
+          console.log('SUCCESS');
+        },
+        error: function () {
+          console.log('ERROR');
+        }
+      });
+    })
+  };
+
+  $.fn.reviewCompose = function () {
+    this.each(function () {
+      new $.ReviewCompose(this);
+    })
+  };
+
+  $(function () {
+    $('form.review-compose').reviewCompose();
+  })
+</script>

@@ -24,7 +24,7 @@ $.MoviesIndex = function (el) {
   };
 
   $('select').on('change', function (e) {
-    var $moviesList = $(this.$el.find('ul#main-list'));
+    var $moviesList = $(this.$el.find('ul.main-list'));
     var selectedOption = $(event.target)
       .find('option:selected')
       .attr('value');
@@ -42,18 +42,18 @@ $.MoviesIndex = function (el) {
   }.bind(this));
 
   $.ajax({
-    dataType: 'json',
     url: 'http://api.themoviedb.org/3/discover/movie?' +
       'with_cast=51576&sort_by=release_date.desc&' +
       'api_key=e505edada279c368d098a520d3fd7992',
+    dataType: 'json',
     data: {},
     success: this.render.bind(this)
   });
 };
 
 $.MoviesIndex.prototype.render = function (data) {
-  var tmpl = _.template(this.$el.find('script#template').html());
-  $(this.$el.find('ul#main-list')).append(
+  var tmpl = _.template(this.$el.find('script.template').html());
+  $(this.$el.find('ul.main-list')).append(
     tmpl({
       movies: data.results,
       genreCodes: this.genreCodes
@@ -101,5 +101,5 @@ $.fn.moviesIndex = function () {
 };
 
 $(function() {
-  $('div#movies-index').moviesIndex();
+  $('div.movies-index').moviesIndex();
 });

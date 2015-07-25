@@ -1,6 +1,6 @@
 <h1>Chuck Norris!</h1>
 
-<div id="movies-index">
+<div class="movies-index">
   <p>Sort by:</p>
   <select>
     <option value="date" selected="selected">Release Date</option>
@@ -8,9 +8,9 @@
     <option value="genre">Genre</option>
   </select>
 
-  <ul id="main-list"></ul>
+  <ul class="main-list"></ul>
 
-  <script id="template" type="text/template">
+  <script class="template" type="text/template">
     <%% movies.forEach(function (movie) { %>
       <li
         data-title="<%%= movie.title %>"
