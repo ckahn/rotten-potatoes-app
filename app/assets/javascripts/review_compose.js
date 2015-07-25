@@ -19,10 +19,13 @@ var saveReview = function (params) {
     dataType: 'json',
     data: params,
     success: addToList,
-    error: function () {
-      alert('Could not save review');
-    }
+    error: showError
   });
+};
+
+var showError = function (resp) {
+  var error_msg = resp.responseJSON[0];
+  alert(error_msg);
 };
 
 $.fn.reviewCompose = function () {
