@@ -22,7 +22,7 @@
         <a href="/movies/<%%= movie.id %>">
           <h3><%%= movie.title %></h3>
           <p style="color: black;"><%%= movie.release_date %></p>
-          <img class="" width="200" src="https://image.tmdb.org/t/p/w396/<%%= movie.poster_path %>">
+          <img class="" width="200" src="http://image.tmdb.org/t/p/w396/<%%= movie.poster_path %>">
         </a>
         <p class="text-muted" style="padding-top: 10px;"><%%= genreCodes[movie.genre_ids[0]] %></p>
       </li>
