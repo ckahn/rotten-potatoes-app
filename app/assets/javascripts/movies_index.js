@@ -1,5 +1,7 @@
 $.MoviesIndex = function (el) {
   this.$el = $(el);
+
+  // Hard-coded so I don't have to hit the API again for each movie
   this.genreCodes = {
     '28' : 'Action',
     '12' : 'Adventure',
@@ -23,23 +25,7 @@ $.MoviesIndex = function (el) {
     '37' : 'Western'
   };
 
-  $('select').on('change', function (e) {
-    var $moviesList = $(this.$el.find('ul.main-list'));
-    var selectedOption = $(event.target)
-      .find('option:selected')
-      .attr('value');
-    switch(selectedOption) {
-      case 'title':
-        sortList($moviesList, byTitle);
-        break;
-      case 'date':
-        sortList($moviesList, byDate);
-        break;
-      case 'genre':
-        sortList($moviesList, byGenre);
-        break;
-    }
-  }.bind(this));
+  listenForSort(this.$el);
 
   $.ajax({
     url: 'http://api.themoviedb.org/3/discover/movie?' +
@@ -84,6 +70,26 @@ var byTitle = function(first, second) {
     return 1;
   }
 };
+
+var listenForSort = function ($el) {
+  $('select').on('change', function (e) {
+    var $moviesList = $($el.find('ul.main-list'));
+    var selectedOption = $(event.target)
+      .find('option:selected')
+      .attr('value');
+    switch(selectedOption) {
+      case 'title':
+        sortList($moviesList, byTitle);
+        break;
+      case 'date':
+        sortList($moviesList, byDate);
+        break;
+      case 'genre':
+        sortList($moviesList, byGenre);
+        break;
+    }
+  });
+}
 
 var sortList = function ($moviesList, sortBy) {
   var $list = $moviesList;

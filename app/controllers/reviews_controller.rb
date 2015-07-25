@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.all
+    @reviews = Review.order(created_at: :desc)
   end
 
   private

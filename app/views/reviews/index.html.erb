@@ -1,7 +1,29 @@
-<ul class="list-group">
+<script type="text/javascript">
+  $('ul.nav li').each(function (idx, li) {
+    $li = $(li);
+    if ($li.hasClass('reviews-tab')) {
+      $li.addClass('active');
+    } else {
+      $li.removeClass('active');
+    }
+  });
+</script>
+
+<table class="table">
+  <tr>
+    <th>User Email</th>
+    <th>Movie Title</th>
+    <th>Rating</th>
+  </tr>
   <% @reviews.each do |review| %>
-  <li class="list-group-item">
-    <%= review.email %> rated <i><%= review.movie_title %><i> <strong><%= review.rating %> out of 5</strong>.
-   </li>
+  <tr>
+    <td><%= review.email %></td>
+    <td><%= review.movie_title %></td>
+    <td>
+      <% review.rating.to_i.times do %>
+      <span class="glyphicon glyphicon-star" style="color: yellow;"></span>
+      <% end %>
+    </td>
+  </tr>
   <% end %>
-</li>
+</table>

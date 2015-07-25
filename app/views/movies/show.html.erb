@@ -1,6 +1,10 @@
-<div class="media">
+<div class="media" style="padding-bottom: 20px;">
   <div class="media-left">
-      <img class="media-object" src="https://image.tmdb.org/t/p/w396/<%= @movie_data['poster_path'] %>" width="200" alt="...">
+      <img
+        class="media-object"
+        src="https://image.tmdb.org/t/p/w396/<%= @movie_data['poster_path'] %>"
+        width="200">
+      </img>
   </div>
   <div class="media-body">
     <h1 class="media-heading"><%= @movie_data['title'] %></h4>
@@ -8,39 +12,46 @@
   </div>
 </div>
 
-<h3>Add Review</h3>
-<form class="review-compose">
+<form class="review-compose form-inline">
   <input
     type="hidden"
     name="review[movie_id]"
     value="<%= @movie_data['id'] %>">
 
-    <input
-      type="hidden"
-      name="review[movie_title]"
-      value="<%= @movie_data['title'] %>">
+  <input
+    type="hidden"
+    name="review[movie_title]"
+    value="<%= @movie_data['title'] %>">
 
-  <label>Email
-    <input type="text" name="review[email]">
-  </label>
-  <label>Rating
-    <select name="review[rating]">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
-  </label>
-  <input type="submit">
+  <div class="form-group">
+    <label>Email
+      <input class="form-control" type="text" name="review[email]">
+    </label>
+  </div>
+  <div class="form-group">
+    <label>Rating
+      <select class="form-control" name="review[rating]">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </label>
+    <button type="submit" class="btn btn-default">Add Review</button>
+  </div>
 </form>
 
 <h3>Reviews</h3>
 <% if @reviews.empty? %>
   <p>[No reviews yet]</p>
 <% end %>
-<ul>
+<ul class="movie-show-reviews">
   <% @reviews.each do |review| %>
-    <li>Email: <%= review.email %> | Rating: <%= review.rating %></li>
+    <li><i><%= review.email %></i>
+      <% review.rating.to_i.times do %>
+      <span class="glyphicon glyphicon-star" style="color: yellow;"></span>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 

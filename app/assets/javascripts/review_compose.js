@@ -7,17 +7,20 @@ $.ReviewCompose = function (el) {
   })
 };
 
+var addToList = function (params) {
+  $list = $('ul.movie-show-reviews');
+  location.reload();
+};
+
 var saveReview = function (params) {
   $.ajax({
     method: 'POST',
     url: '/reviews',
     dataType: 'json',
     data: params,
-    success: function () {
-      console.log('SUCCESS');
-    },
+    success: addToList,
     error: function () {
-      console.log('ERROR');
+      alert('Could not save review');
     }
   });
 };

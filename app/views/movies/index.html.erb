@@ -1,4 +1,4 @@
-<h1>Movies (with Chuck Norris)</h1>
+<h1>Chuck Norris Movies!</h1>
 
 <div class="movies-index">
 
@@ -24,7 +24,7 @@
           <p style="color: black;"><%%= movie.release_date %></p>
           <img class="" width="200" src="https://image.tmdb.org/t/p/w396/<%%= movie.poster_path %>">
         </a>
-        <p class="text-muted"><%%= genreCodes[movie.genre_ids[0]] %></p>
+        <p class="text-muted" style="padding-top: 10px;"><%%= genreCodes[movie.genre_ids[0]] %></p>
       </li>
     <%% }); %>
   </script>
