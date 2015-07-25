@@ -1,8 +1,8 @@
-<h1><%= @film_data['title'] %></h1>
+<h1><%= @movie_data['title'] %></h1>
 <img
-  src="https://image.tmdb.org/t/p/w396/<%= @film_data['poster_path'] %>"
+  src="https://image.tmdb.org/t/p/w396/<%= @movie_data['poster_path'] %>"
   width="200">
-<p><%= @film_data['overview'] %></p>
+<p><%= @movie_data['overview'] %></p>
 
 <h2>Add Review</h2>
 <form class="review-compose">
@@ -20,27 +20,35 @@
   <input type="submit">
 </form>
 
+<h2>Review</h2>
+<ul>
+  <li>Review</li>
+</ul>
+
 <script type="text/javascript">
   $.ReviewCompose = function (el) {
     this.$el = $(el);
     this.$el.on('submit', function (e) {
       e.preventDefault();
       var params = $(e.target).serializeJSON();
-      $.ajax({
-        method: 'POST',
-        url: '/reviews',
-        dataType: 'json',
-        data: params,
-        success: function () {
-          console.log('SUCCESS');
-        },
-        error: function () {
-          console.log('ERROR');
-        }
-      });
+      saveReview(params);
     })
   };
 
+  var saveReview = function (params) {
+    $.ajax({
+      method: 'POST',
+      url: '/reviews',
+      dataType: 'json',
+      data: params,
+      success: function () {
+        console.log('SUCCESS');
+      },
+      error: function () {
+        console.log('ERROR');
+      }
+    });
+  }
   $.fn.reviewCompose = function () {
     this.each(function () {
       new $.ReviewCompose(this);
