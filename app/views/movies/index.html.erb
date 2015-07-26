@@ -11,6 +11,12 @@
     </select>
   </div>
 
+  <div style="filter-movies">
+    <label>Filter by title
+      <input class="filter-input" type="text">
+    </label>
+  </div>
+
   <ul class="main-list list-group"></ul>
 
   <script class="template" type="text/template">
@@ -34,4 +40,32 @@
   $(function() {
     $('div.movies-index').moviesIndex();
   });
+
+  var $filterInput = $('input.filter-input');
+  $filterInput.on('keyup', function (e) {
+    var input = $filterInput.val();
+    if (input !== '') {
+      filterMovies(input);
+    } else {
+      showAll();
+    }
+  });
+  var filterMovies = function (substring) {
+    var $movieItems = $('ul.main-list').children();
+    $movieItems.each(function (i, movie) {
+      var $movie = $(movie);
+      var title = $movie.attr('data-title');
+      if (title.indexOf(substring) > -1) {
+        $movie.removeClass('hide');
+      } else {
+        $movie.addClass('hide');
+      }
+    });
+  };
+  var showAll = function () {
+    var $movieItems = $('ul.main-list').children();
+    $movieItems.each(function (i, movie) {
+      $(movie).removeClass('hide');
+    });
+  };
 </script>
