@@ -47,6 +47,12 @@ $.MoviesIndex.prototype.render = function (data) {
   );
 };
 
+$.fn.moviesIndex = function () {
+  return this.each(function () {
+    new $.MoviesIndex(this);
+  });
+};
+
 var byDate = function(first, second) {
   if ($(first).attr('data-date') > $(second).attr('data-date')) {
     return -1;
@@ -97,11 +103,5 @@ var sortList = function ($moviesList, sortBy) {
   $items.sort(sortBy);
   $.each($items, function (idx, itm) {
     $list.append(itm);
-  });
-};
-
-$.fn.moviesIndex = function () {
-  return this.each(function () {
-    new $.MoviesIndex(this);
   });
 };
