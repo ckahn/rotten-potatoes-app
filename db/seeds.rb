@@ -8,11 +8,16 @@ API_URL = 'http://api.themoviedb.org/3/discover/movie?' +
 movie_data = JSON.load(open(API_URL))
 movie_data['results'].each do |movie_h|
   3.times do
-    Review.create!(
-      email: Faker::Internet.safe_email,
+    review = Review.create!(
+      email: Faker::Internet.email,
       movie_id: movie_h['id'],
       movie_title: movie_h['title'],
-      rating: ['1', '2', '3', '4'].sample
+      rating: %w[1 2 3 4].sample
     )
   end
+end
+
+Review.all.each do |review|
+  review.created_at = Time.now - rand(9000000)
+  review.save
 end

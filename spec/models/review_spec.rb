@@ -26,9 +26,9 @@ RSpec.describe Review, type: :model do
   context "when email format is valid" do
     it "should be valid" do
       good_emails = [
-        "user@email.com",
+        "user@email.io",
         "user1@email.com",
-        "user-1@email.com",
+        "user-1@email.info",
         "user.name@email.com",
         "user.name+1@email.com",
         "USER@EMAIL.COM",
@@ -51,7 +51,7 @@ RSpec.describe Review, type: :model do
         "@.com",
         "@a.com",
         "user@email.c",
-        "user@email.comm",
+        "user@email.commm",
         "user@email@email.com",
         "us*r@email.com"
       ]
