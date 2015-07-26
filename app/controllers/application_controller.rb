@@ -1,7 +1,10 @@
 include ActionView::Helpers::DateHelper
 
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+
+  def movie_api_url(id)
+    'http://api.themoviedb.org/3/movie/' + id +
+    '?api_key=e505edada279c368d098a520d3fd7992'
+  end
 end

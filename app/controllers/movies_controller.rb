@@ -6,10 +6,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie_data = JSON.load(open(
-      'http://api.themoviedb.org/3/movie/' + params[:id] +
-      '?api_key=e505edada279c368d098a520d3fd7992'
-    ))
+    @movie_data = JSON.load(open(movie_api_url(params[:id])))
     @reviews = Review.where(movie_id: params[:id]).order(created_at: :desc)
   end
 end

@@ -1,7 +1,7 @@
 $.MoviesIndex = function (el) {
   this.$el = $(el);
 
-  // Hard-coded so I don't have to hit the API again for each movie
+  // Hard-coded as hash so I don't have to hit the API for each movie
   this.genreCodes = {
     '28' : 'Action',
     '12' : 'Adventure',
