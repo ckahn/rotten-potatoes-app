@@ -16,11 +16,12 @@ $.fn.moviesFilter = function () {
   });
 };
 
-var filterMovies = function (substring) {
+var filterMovies = function (substr) {
+  var regex = new RegExp(substr, 'i');
   movieItems().each(function (i, movie) {
     var $movie = $(movie);
     var title = $movie.attr('data-title');
-    if (title.indexOf(substring) > -1) {
+    if (title.search(regex) > -1) {
       $movie.removeClass('hide');
     } else {
       $movie.addClass('hide');
