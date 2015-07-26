@@ -15,7 +15,5 @@
 //= require jquery_ujs
 //= require underscore
 //= require serializejson
-//= require movies_index
-//= require review_compose
 //= require turbolinks
 //= require_tree .
