@@ -19,24 +19,29 @@
 
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-
       <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand" href="#">Rotten Potatoes</a>
       </div>
-
-      <div class="collapse navbar-collapse">
+      <div id="navbar" class="navbar-collapse collapse"
+           aria-expanded="false" style="height: 1px;">
         <ul class="nav navbar-nav">
-          <li class="movies-tab active"><a href="<%= movies_url %>">Movies</a></li>
+          <li class="movies-tab active">
+            <a href="<%= movies_url %>">Movies</a>
+          </li>
           <li class ="reviews-tab"><a href="<%= reviews_url %>">Reviews</a></li>
         </ul>
       </div>
-
     </div>
   </nav>
 
-<div class="container">
-  <%= yield %>
-</div>
-
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 </html>
