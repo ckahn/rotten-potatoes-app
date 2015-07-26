@@ -17,13 +17,13 @@ RSpec.describe Review, type: :model do
     )
   end
 
-  context "when all attributes are good" do
+  context "when all attributes are valid" do
     it "should be valid" do
       expect(review.valid?).to be true
     end
   end
 
-  context "when email format is good" do
+  context "when email format is valid" do
     it "should be valid" do
       good_emails = [
         "user@email.com",
@@ -40,7 +40,7 @@ RSpec.describe Review, type: :model do
     end
   end
 
-  context "when email format is bad" do
+  context "when email format is invalid" do
     it "should be invalid" do
       bad_emails = [
         "",
